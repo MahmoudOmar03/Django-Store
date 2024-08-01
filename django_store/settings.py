@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,7 +56,9 @@ ROOT_URLCONF = 'django_store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.context_processors.store_website',
             ],
         },
     },
@@ -109,17 +112,37 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+
+
 USE_I18N = True
 
 USE_TZ = True
+
+
+MEDIA_URL='/media/'
+MEDIA_ROOT='media/'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS=[BASE_DIR / 'static']
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'ddac6019d562f8'
+EMAIL_HOST_PASSWORD = '9957845e4241e9'
+EMAIL_PORT = '2525'
+
+SITE_URL='http://127.0.0.1:8000'
+
+STRIPE_PUBLISHABLE_KEY='pk_test_51PhymUJfN91Hyxb0DZDl5o0K4MYwoYazVCAPF8hxprfQhWfsYIAG7W5VLAcIMUOGjvaJEZNZRPtCPJcSK9hJJlnh004Xefnwut'
+STRIPE_SECRET_KEY="sk_test_51PhymUJfN91Hyxb0OcdlFrlwDvROBhHZwtC6oCIh2VLpWQNvda54HP7tQWacSWRrcDuZAr2iYpSlQnD5SABDf6N000FKhMQ35o"
+STRIPE_ENDPOINT_SECRET='whsec_0142f33215b827f3631a6a4742c52c6fdb26a9bbb8affe30944eade09e09323f'
+CURRENCY='USD'
